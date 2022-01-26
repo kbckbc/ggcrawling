@@ -11,8 +11,15 @@ Needed packages :
     pip install beautifulsoup4
     pip install pymongo
     pip install lxml
+How to get the code : 
+    git clone https://github.com/kbckbc/ggcrawling.git .
+Run debug mode :
+    python ggcrawling.py
+Run non-debug mode :
+    python -O ggcrawling.py
 '''
 
+from tkinter import E
 import requests
 from bs4 import BeautifulSoup
 from pymongo import MongoClient
@@ -43,7 +50,11 @@ for i in range(howmanypages):
             title = item.select_one("h3.LC20lb").text
             contents = item.select_one("div.IsZvec").text
             line = line+1
-            print("[{}]{}:{}:{}:{}".format(line, current_utc_time, site, title, contents))
+            if __debug__: print('''result [{}]
+                utc_time: {}
+                site: {}
+                title: {}
+                contents: {}'''.format(line, current_utc_time, site, title, contents))
             col.insert_one({
                     "name": site,
                     "title": title,
@@ -51,5 +62,6 @@ for i in range(howmanypages):
                     "view": 0,
                     "date": current_utc_time
                 })
-        except:
+        except Exception as e:
+            if __debug__: print(e)
             pass
