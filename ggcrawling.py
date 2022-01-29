@@ -4,7 +4,8 @@ Author : BC Gwak
 What to do : 
     This source code will catch URL, title, contents 
     from Google search result using BeautifulSoup 
-    And insert into Mongodb
+    And insert the results into Mongodb
+    Simply use it when you want to put test data into DB
 Needed packages : 
     In order to use this source, install these packages.
     pip install requests
